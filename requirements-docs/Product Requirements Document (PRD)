@@ -1,0 +1,129 @@
+# Product Requirements Document (PRD)  
+## Customer360 Intelligent Insights Platform – Phase 1
+
+### 1. Overview
+
+Customer360 Intelligent Insights Platform is a data and AI-powered ecosystem that unifies customer data from multiple sources into a single, actionable view. It enables analytics, segmentation, and activation across channels, supporting smarter decision-making and personalized experiences.
+
+Phase 1 focuses on establishing the core data foundation: ingesting data from key systems, unifying identities, and enabling basic analytics and segmentation.
+
+---
+
+### 2. Problem Statement
+
+Customer data is currently fragmented across web analytics, CRM, transactional systems, and marketing platforms. This leads to:
+
+- Inconsistent customer views across teams  
+- Difficulty measuring engagement and retention  
+- Limited personalization and targeting capabilities  
+- Manual, error-prone reporting and decision-making  
+
+The organization needs a unified, reliable Customer360 view to power analytics, activation, and AI use-cases.
+
+---
+
+### 3. Objectives & Success Metrics
+
+**Objectives (Phase 1)**  
+- Create a unified customer profile that aggregates data from at least 3 core systems  
+- Enable basic churn-risk and engagement analytics  
+- Provide a foundation for future AI models and real-time use-cases  
+
+**Success Metrics**  
+- ≥ 80% of active customers represented as unified profiles  
+- ≥ 90% success rate for daily data ingestion jobs  
+- At least 3 high-value segments available for analytics/activation (e.g., “High value / at risk”, “New customers”, “Dormant users”)  
+
+---
+
+### 4. Scope
+
+**In Scope (Phase 1)**  
+- Data ingestion from 3 core sources (e.g., CRM, web events, transactions)  
+- Identity resolution rules (email + customer ID + device ID, where available)  
+- Core profile schema definition (demographics, lifecycle, engagement signals)  
+- Basic analytics views / tables for Customer360 reporting  
+- Initial dashboards for customer overview & retention metrics  
+
+**Out of Scope (Phase 1)**  
+- Real-time decisioning and streaming personalization  
+- Complex journey orchestration  
+- Full marketing automation build-out  
+- Deep predictive modeling beyond simple churn/engagement prototypes  
+
+---
+
+### 5. Users & Stakeholders
+
+- **Primary Users**
+  - Marketing team (targeting & segmentation)
+  - Analytics / BI team (reporting & insight generation)
+  - Product managers (feature usage and retention insights)
+
+- **Key Stakeholders**
+  - Product Owner, Customer360
+  - CDP / Data Architect
+  - Data Engineering Lead
+  - AI / Data Science Lead
+  - Marketing Operations Lead
+  - Compliance / Security Representative
+
+---
+
+### 6. High-Level Features (Phase 1)
+
+1. **Unified Customer Profile**
+   - Aggregated attributes from CRM, web, and transaction systems  
+   - Base identity graph (per user)  
+
+2. **Data Ingestion Pipelines**
+   - Scheduled ingestion jobs (batch)  
+   - Monitoring & basic error handling  
+
+3. **Analytics & Reporting Views**
+   - Tables/views designed for BI tools (Power BI / Looker)  
+   - Retention and engagement metric support  
+
+4. **Segmentation Capability**
+   - Basic rules-based segments (e.g., “active last 30 days”, “no activity 90 days”)  
+
+5. **Governance & Access Control**
+   - Role-based access to PII  
+   - Clear data ownership across teams  
+
+---
+
+### 7. User Stories (Samples)
+
+- **As a marketing manager**, I want to see unified profiles with engagement and purchase history so that I can build better segments.  
+- **As a data analyst**, I want consistent Customer360 tables I can query for dashboards without manually joining multiple systems.  
+- **As a product manager**, I want to understand retention and churn signals so I can prioritize product improvements.  
+
+---
+
+### 8. Acceptance Criteria (Examples)
+
+| ID  | Given | When | Then |
+|-----|-------|------|------|
+| AC1 | A customer exists in CRM and transaction systems | Data pipelines run | A unified profile exists for that customer |
+| AC2 | A data ingestion job completes | Monitoring runs | Success/failure status is logged and accessible |
+| AC3 | A BI analyst queries the Customer360 view | Query filters by date range and segment | Results return within agreed SLA |
+| AC4 | A user requests access to PII tables | They do not have the proper role | Access is denied and logged |
+
+---
+
+### 9. Risks & Assumptions
+
+**Risks**  
+- Inconsistent identifiers across systems may reduce profile stitching accuracy  
+- Poor data quality in source systems may impact analytics  
+- Scope creep into advanced personalization may delay core foundation work  
+
+**Assumptions**  
+- Source systems can provide data via exports or APIs on a regular schedule  
+- The organization has (or will have) a data warehouse (e.g., Snowflake / BigQuery)  
+- Stakeholders are available for requirements clarification and validation  
+
+---
+
+*This PRD is a portfolio artifact representing how I would frame a Customer360 foundation project in a real-world setting.*
