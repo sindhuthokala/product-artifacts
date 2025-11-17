@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Platform Roadmap</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        h1 {
+            font-size: 42px;
+            color: #1e293b;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            color: #64748b;
+        }
+        
+        .timeline-container {
+            margin-top: 40px;
+            overflow-x: auto;
+        }
+        
+        .swimlane {
+            display: flex;
+            margin-bottom: 20px;
+            min-height: 140px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .swimlane:hover {
+            transform: translateX(5px);
+        }
+        
+        .lane-header {
+            min-width: 220px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+        
+        .lane-header::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-left: 15px solid;
+        }
+        
+        .lane1 .lane-header {
+            background: linear-gradient(135deg, #06b6d4, #0891b2);
+        }
+        
+        .lane1 .lane-header::after {
+            border-left-color: #0891b2;
+        }
+        
+        .lane2 .lane-header {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+        }
+        
+        .lane2 .lane-header::after {
+            border-left-color: #7c3aed;
+        }
+        
+        .lane3 .lane-header {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+        
+        .lane3 .lane-header::after {
+            border-left-color: #059669;
+        }
+        
+        .lane4 .lane-header {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+        
+        .lane4 .lane-header::after {
+            border-left-color: #d97706;
+        }
+        
+        .lane-content {
+            flex: 1;
+            display: flex;
+            gap: 15px;
+            padding: 20px;
+            background: white;
+            align-items: center;
+        }
+        
+        .lane1 .lane-content {
+            background: linear-gradient(90deg, #ecfeff 0%, #ffffff 100%);
+        }
+        
+        .lane2 .lane-content {
+            background: linear-gradient(90deg, #f5f3ff 0%, #ffffff 100%);
+        }
+        
+        .lane3 .lane-content {
+            background: linear-gradient(90deg, #d1fae5 0%, #ffffff 100%);
+        }
+        
+        .lane4 .lane-content {
+            background: linear-gradient(90deg, #fef3c7 0%, #ffffff 100%);
+        }
+        
+        .milestone {
+            min-width: 200px;
+            background: white;
+            padding: 18px;
+            border-radius: 10px;
+            border-left: 5px solid;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .milestone:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+        
+        .lane1 .milestone {
+            border-color: #06b6d4;
+        }
+        
+        .lane2 .milestone {
+            border-color: #8b5cf6;
+        }
+        
+        .lane3 .milestone {
+            border-color: #10b981;
+        }
+        
+        .lane4 .milestone {
+            border-color: #f59e0b;
+        }
+        
+        .milestone-title {
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 15px;
+            line-height: 1.4;
+        }
+        
+        .milestone::before {
+            content: '';
+            position: absolute;
+            left: -9px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: white;
+        }
+        
+        .lane1 .milestone::before {
+            box-shadow: 0 0 0 3px #06b6d4;
+        }
+        
+        .lane2 .milestone::before {
+            box-shadow: 0 0 0 3px #8b5cf6;
+        }
+        
+        .lane3 .milestone::before {
+            box-shadow: 0 0 0 3px #10b981;
+        }
+        
+        .lane4 .milestone::before {
+            box-shadow: 0 0 0 3px #f59e0b;
+        }
+        
+        .arrow {
+            font-size: 24px;
+            color: #cbd5e1;
+            display: flex;
+            align-items: center;
+        }
+        
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #e2e8f0;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .legend-box {
+            width: 40px;
+            height: 30px;
+            border-radius: 6px;
+            border-left: 5px solid;
+        }
+        
+        .legend-box.l1 {
+            background: linear-gradient(90deg, #ecfeff, #ffffff);
+            border-color: #06b6d4;
+        }
+        
+        .legend-box.l2 {
+            background: linear-gradient(90deg, #f5f3ff, #ffffff);
+            border-color: #8b5cf6;
+        }
+        
+        .legend-box.l3 {
+            background: linear-gradient(90deg, #d1fae5, #ffffff);
+            border-color: #10b981;
+        }
+        
+        .legend-box.l4 {
+            background: linear-gradient(90deg, #fef3c7, #ffffff);
+            border-color: #f59e0b;
+        }
+        
+        .legend-text {
+            font-weight: 600;
+            color: #1e293b;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+            
+            .lane-header {
+                min-width: 150px;
+                font-size: 14px;
+                padding: 15px;
+            }
+            
+            .milestone {
+                min-width: 160px;
+                font-size: 13px;
+            }
+            
+            .legend {
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Data Platform Roadmap</h1>
+            <p class="subtitle">Customer 360 Implementation Timeline</p>
+        </header>
+        
+        <div class="timeline-container">
+            <!-- Lane 1: Data Foundation -->
+            <div class="swimlane lane1">
+                <div class="lane-header">
+                    Data Foundation
+                </div>
+                <div class="lane-content">
+                    <div class="milestone">
+                        <div class="milestone-title">Source System Inventory</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="milestone">
+                        <div class="milestone-title">Data Contracts Finalized</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="milestone">
+                        <div class="milestone-title">Ingestion Pipelines Built</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="milestone">
+                        <div class="milestone-title">Staging Tables Setup</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Lane 2: Identity Resolution -->
+            <div class="swimlane lane2">
+                <div class="lane-header">
+                    Identity Resolution
+                </div>
+                <div class="lane-content">
+                    <div class="milestone">
+                        <div class="milestone-title">Matching Rules Defined</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="milestone">
+                        <div class="milestone-title">Dedup Logic Built</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="milestone">
+                        <div class="milestone-title">Unified ID Generation</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="milestone">
+                        <div class="milestone-title">Basic Device→User Mapping</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Lane 3: Unified Profiles -->
+            <div class="swimlane lane3">
+                <div class="lane-header">
+                    Unified Profiles
+                </div>
+                <div class="lane-content">
+                    <div class="milestone">
+                        <div class="milestone-title">Profile Schema Finalized</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="milestone">
+                        <div class="milestone-title">Profile Table Build</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="milestone">
+                        <div class="milestone-title">Profile QA & Validation</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="milestone">
+                        <div class="milestone-title">Profile KPIs Defined (Retention, Engagement, etc.)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Lane 4: Analytics -->
+            <div class="swimlane lane4">
+                <div class="lane-header">
+                    Analytics
+                </div>
+                <div class="lane-content">
+                    <div class="milestone">
+                        <div class="milestone-title">Dashboard Wireframe</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="milestone">
+                        <div class="milestone-title">KPI Definitions</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="milestone">
+                        <div class="milestone-title">SQL Layer</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="milestone">
+                        <div class="milestone-title">BI Dashboard First Release</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-box l1"></div>
+                <span class="legend-text">Data Foundation</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box l2"></div>
+                <span class="legend-text">Identity Resolution</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box l3"></div>
+                <span class="legend-text">Unified Profiles</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box l4"></div>
+                <span class="legend-text">Analytics</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
